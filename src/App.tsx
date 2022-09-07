@@ -1,25 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Select } from './components/Select';
+import { GlobalStyle } from './style/globalStyle'
+import { Option } from './interfaces'
+import { useState } from 'react';
+import { P, SpanP } from './components/Select/style';
+
+const options: Option[] = [
+  {
+    label: "Audi",
+    value: "audi"
+  },
+  {
+    label: "Ferrari",
+    value: "ferrari"
+  },
+  {
+    label: "Mercedes Benz",
+    value: "mercedes"
+  },
+  {
+    label: "BMW",
+    value: "bmw"
+  },
+  {
+    label: "Tesla",
+    value: "tesla"
+  }
+]
 
 function App() {
+  const [selectedItem, setSelecteditem] = useState<Option | null>(null)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <div>
+        <Select
+          placeholder="Select a Car"
+          selected={selectedItem}
+          options={options}
+          onChange={(selection: Option) => setSelecteditem(selection)}
+        />
+        <P>Hello, my selection is <SpanP>{selectedItem?.label}</SpanP></P>
+      </div>
+    </>
   );
 }
 
